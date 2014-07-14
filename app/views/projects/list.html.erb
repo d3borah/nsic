@@ -1,0 +1,35 @@
+<% @project_title = "Projects List"%>
+
+<div class="project list">
+
+
+<table class="listing" summary="Project list">
+  <tr class="header">
+    <th><%= sortable "name", "Name" %></th>
+    <th><%= sortable "opendate", "Open Date" %></th>
+    <th>Project Type</th>
+    <th>Number of Samples</th>
+    <th>Actions</th>
+  </tr>
+  <% @projects.each do |project| %>
+  <tr class="<%= cycle('odd', 'even') %>">  
+    <td><%= project.name %></td>
+    <td><%= project.opendate.strftime("%m/%d/%Y")%></td>
+    <td>
+      <% if project.ent.rowindex.first.udtid == 51 %>
+      Genotyping
+      <% elsif project.ent.rowindex.first.udtid == 52 %>
+      Sequencing
+      <% end %>
+    </td>
+    <td><%= project.samples.size %></td>
+    <td class="actions">
+        <%= link_to("Show", {:action => 'show', :id => project.projectid}, :class => 'action show') %>
+      </td>
+
+  </tr>
+  <% end %> 
+</table>
+
+
+</div>

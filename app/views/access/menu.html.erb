@@ -1,0 +1,12 @@
+<% @page_title = "Menu" %>
+
+<div class="menu">
+      <h2>Menu</h2>
+      <div class="identity">Logged in as: <%= session[:username] %><div>
+       <ul>
+               <li><%= link_to("Manage Projects", :controller => 'projects') %></li>
+               <li><%= link_to("Logout", :action => 'logout') %></li>
+
+       </ul>
+</div>
+

@@ -1,0 +1,47 @@
+<% @project_title = "Project Samples List" %>
+
+<h1><%= @project.name %></h1>
+
+<div class="project list">
+<%= link_to '<< Back to Projects', projects_path %><p id="notice"><%= notice %></p>
+
+<table class="listing" summary="Project Samples list">
+  <tr class="header" align="center">
+	<th>Sample Name</th>
+	<th style="text-align:center">Received</th>
+  <th style="text-align:center">QC Start</th>
+  <th style="text-align:center">QC Finish</th>
+  <th style="text-align:center">Lib Prep Start</th>
+  <th style="text-align:center">Lib Prep Finish</th>
+  <th style="text-align:center">Seq Start</th>
+  <th style="text-align:center">Seq</th>
+  <th style="text-align:center">Done</th>
+  <th></th>
+  <th style="text-align:center">Currently</th>
+	<th style="text-align:center">As Of</th>
+	<th style="text-align:center">Action</th>
+</tr>
+
+<% @project.samples.each do |sample| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+        <td><%= link_to sample.name, sample%></td>
+        <td class="rcvd"></td>
+        <td class="qcstart"></td>
+        <td class="qcfinish"></td>
+        <td class="prepstart"></td>
+        <td class="prepfinish"></td>
+        <td class="seqstart"></td>
+        <td class="seq"></td>
+        <td class="done"></td>
+        <td class="blankcolumn"></td>
+	     <td><%= sample.sample_udf_views.by_progress.first.udfvalue %></td>
+	     <td><%= sample.sample_udf_views.by_progress_date.first.udfvalue %></td>
+        <td class="actions">
+		<%= link_to("Show", {:controller => :samples, :action => 'show', :id => sample.name}, :class => 'action show') %></td>
+        
+      </tr>
+    <% end %>
+
+</table>
+
+</div>
